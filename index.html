@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+<style>
   :root{
     --black:#08080a;
     --panel:#141417;
@@ -124,19 +125,19 @@
   .grid{
     display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;
   }
-  .grid.shorts-grid{
+  .grid.vertical-grid{
     grid-template-columns:repeat(4, 1fr);
   }
   .card{
     background:var(--black);border:1px solid var(--border);border-radius:12px;overflow:hidden;
     display:flex;flex-direction:column;position:relative;
   }
-  .card.hide{display:none !important;}
   .card .thumb{
+    width:100%;padding:0;border:none;color:inherit;font:inherit;
     aspect-ratio:16/9;position:relative;display:flex;align-items:center;justify-content:center;
-    background-size: cover; background-position: center; cursor:pointer;
+    background-color:var(--panel-2);background-size:cover;background-position:center;cursor:pointer;
   }
-  .card.shorts .thumb{aspect-ratio:9/16;}
+  .card.vertical .thumb{aspect-ratio:9/16;}
   .thumb-play{
     position:absolute;width:44px;height:44px;border-radius:50%;
     background:rgba(255,59,63,.9);
@@ -153,6 +154,7 @@
     width:100%;height:100%;display:none;position:absolute;top:0;left:0;z-index:5;background:#000;
   }
   .player-container iframe{width:100%;height:100%;border:none;}
+  .grid-empty{grid-column:1 / -1;color:var(--gray);font-size:15px;padding:40px 0;margin:0;}
 
   /* ABOUT */
   .about{display:grid;grid-template-columns:auto 1.2fr;gap:48px;align-items:center;}
@@ -213,7 +215,7 @@
 
   /* RESPONSIVO */
   @media (max-width: 900px){
-    .grid, .grid.shorts-grid{grid-template-columns:repeat(2,1fr);}
+    .grid, .grid.vertical-grid{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width: 768px){
     .site-nav{padding:14px 18px;}
@@ -225,7 +227,7 @@
     .hero h1{font-size:30px;}
 
     section{padding:56px 20px;}
-    .grid, .grid.shorts-grid{grid-template-columns:1fr;}
+    .grid, .grid.vertical-grid{grid-template-columns:1fr;}
 
     .about{grid-template-columns:1fr;}
     .about-photo{width:100%;max-width:280px;aspect-ratio:1/1;}
@@ -282,7 +284,7 @@
         </div>
       </div>
       <div class="hero-media">
-        <iframe src="https://www.youtube.com/embed/-M70DAdB1VY" title="General Demo Reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="hero-video" title="General Demo Reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -293,161 +295,15 @@
         <p data-i18n="portfolio_text">A slice of what's come out of here. Filter by format and by niche.</p>
       </div>
 
+      <!-- Os botões de formato e os nichos são gerados pelo script (seção 4) -->
       <div class="format-toggle" id="format-toggle">
-        <button data-format="youtube" class="active">Horizontals</button>
-        <button data-format="shorts">Verticals</button>
+        <button type="button" data-format="horizontal" data-i18n="format_horizontal">Horizontal</button>
+        <button type="button" data-format="vertical" data-i18n="format_vertical">Vertical</button>
       </div>
 
-      <div class="niche-pills" id="niche-pills">
-        <button data-niche="todos" class="active" data-i18n="niche_all">All</button>
-        <button data-niche="gameplay">Gameplay</button>
-        <button data-niche="vlogs">Vlogs</button>
-        <button data-niche="anime">Anime</button>
-        <button data-niche="storytelling">Storytelling</button>
-        <button data-niche="podcast">Podcast</button>
-      </div>
+      <div class="niche-pills" id="niche-pills"></div>
 
-      <div class="grid" id="grid">
-
-        <!-- HORIZONTAIS (YOUTUBE) -->
-        <div class="card" data-format="youtube" data-niche="gameplay" data-video-id="m81fSzFMRmc">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/m81fSzFMRmc/hqdefault.jpg');">
-            <span class="thumb-tag">Gameplay</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card" data-format="youtube" data-niche="gameplay" data-video-id="s-dthYY1mQU">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/s-dthYY1mQU/hqdefault.jpg');">
-            <span class="thumb-tag">Gameplay</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card" data-format="youtube" data-niche="vlogs" data-video-id="v54JkhiTSgQ">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/v54JkhiTSgQ/hqdefault.jpg');">
-            <span class="thumb-tag">Vlog</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card" data-format="youtube" data-niche="vlogs" data-video-id="FgP16GUatCs">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/FgP16GUatCs/hqdefault.jpg');">
-            <span class="thumb-tag">Vlog</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card" data-format="youtube" data-niche="anime" data-video-id="_MbCUv6ipDA">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/_MbCUv6ipDA/hqdefault.jpg');">
-            <span class="thumb-tag">Anime</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card" data-format="youtube" data-niche="gameplay" data-video-id="Ydyl83zWv68">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/Ydyl83zWv68/hqdefault.jpg');">
-            <span class="thumb-tag">Gameplay</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card" data-format="youtube" data-niche="vlogs" data-video-id="7hUfuBLI4gU">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/7hUfuBLI4gU/hqdefault.jpg');">
-            <span class="thumb-tag">Vlog</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card" data-format="youtube" data-niche="storytelling" data-video-id="vhljKePImKQ">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/vhljKePImKQ/hqdefault.jpg');">
-            <span class="thumb-tag">Storytelling</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card" data-format="youtube" data-niche="storytelling" data-video-id="h4IK9U7npPk">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/h4IK9U7npPk/hqdefault.jpg');">
-            <span class="thumb-tag">Storytelling</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <!-- VERTICAIS (SHORTS/REELS) -->
-        <div class="card shorts" data-format="shorts" data-niche="anime" data-video-id="3-JCOvaV3PQ">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/3-JCOvaV3PQ/hqdefault.jpg');">
-            <span class="thumb-tag">Anime</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card shorts" data-format="shorts" data-niche="anime" data-video-id="axvuiXMCTsE">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/axvuiXMCTsE/hqdefault.jpg');">
-            <span class="thumb-tag">Anime</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-video-id="MGFgytiIqi0">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/MGFgytiIqi0/hqdefault.jpg');">
-            <span class="thumb-tag">Gameplay</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-video-id="I8MYR7Y150c">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/I8MYR7Y150c/hqdefault.jpg');">
-            <span class="thumb-tag">Gameplay</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-video-id="wf1AglOHoPc">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/wf1AglOHoPc/hqdefault.jpg');">
-            <span class="thumb-tag">Gameplay</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card shorts" data-format="shorts" data-niche="podcast" data-video-id="DkTtTPDBiVE">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/DkTtTPDBiVE/hqdefault.jpg');">
-            <span class="thumb-tag">Podcast</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card shorts" data-format="shorts" data-niche="podcast" data-video-id="k9nmCOjVR6c">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/k9nmCOjVR6c/hqdefault.jpg');">
-            <span class="thumb-tag">Podcast</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-video-id="hZsaiaQCI3o">
-          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/hZsaiaQCI3o/hqdefault.jpg');">
-            <span class="thumb-tag">Gameplay</span>
-            <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="player-container"></div>
-        </div>
-
-      </div>
+      <div class="grid" id="grid"></div>
     </section>
 
     <!-- SOBRE -->
@@ -541,7 +397,81 @@
 
   </div>
 
+
 <script>
+/* =====================================================================
+   ÍNDICE
+   1. VÍDEOS ........ onde você adiciona/remove vídeos  (EDITE AQUI)
+   2. TEXTOS ........ traduções PT / EN
+   3. ESTADO & HELPERS
+   4. PORTFÓLIO ..... filtros, grid e player
+   5. IDIOMA ........ troca de idioma
+   6. NAV MOBILE
+   7. INICIALIZAÇÃO
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. VÍDEOS
+   ---------------------------------------------------------------------
+   Cada vídeo é uma linha em VIDEOS:
+
+     { id:'ID_DO_YOUTUBE', niche:'gameplay', format:'horizontal' }
+
+   Campos:
+     id      ID do vídeo no YouTube (a parte depois de ?v= ou de /shorts/)
+     niche   um de NICHES (gameplay, vlogs, anime, storytelling, podcast)
+     format  'horizontal' ou 'vertical'
+     langs   (opcional) em quais idiomas o vídeo aparece: ['pt'], ['en'] ou
+             ['pt','en']. Se você NÃO colocar, aparece nos dois idiomas.
+
+   Vídeo que não é do YouTube (Vimeo, arquivo .mp4 hospedado, etc.):
+     use `embed` (URL do player) e `thumb` (URL da imagem de capa) no lugar de `id`:
+     { embed:'https://player.vimeo.com/video/123456?autoplay=1',
+       thumb:'img/capa.jpg', niche:'vlogs', format:'horizontal', langs:['en'] }
+
+   Exemplos:
+     { id:'abc123', niche:'anime', format:'vertical', langs:['pt'] }   // só no site em português
+     { id:'xyz789', niche:'anime', format:'vertical', langs:['en'] }   // só no site em inglês
+   ===================================================================== */
+
+// Vídeo do hero (demoreel). Pode ser um diferente por idioma.
+const HERO_VIDEO = {
+  pt: '-M70DAdB1VY',
+  en: '-M70DAdB1VY'
+};
+
+// Ordem dos filtros de nicho. Para criar um nicho novo, adicione aqui
+// e crie a chave niche_<nome> nos dois idiomas em TEXTOS.
+const NICHES = ['gameplay', 'vlogs', 'anime', 'storytelling', 'podcast'];
+
+const VIDEOS = [
+  /* ---------- HORIZONTAIS ---------- */
+  { id:'m81fSzFMRmc',  niche:'gameplay', format:'horizontal' },
+  { id:'s-dthYY1mQU',  niche:'gameplay', format:'horizontal' },
+  { id:'v54JkhiTSgQ',  niche:'vlogs',    format:'horizontal' },
+  { id:'FgP16GUatCs',  niche:'vlogs',    format:'horizontal' },
+  { id:'_MbCUv6ipDA',  niche:'anime',    format:'horizontal' },
+  { id:'Ydyl83zWv68',  niche:'gameplay', format:'horizontal' },
+  { id:'7hUfuBLI4gU',  niche:'vlogs',    format:'horizontal' },
+  { id:'vhljKePImKQ',  niche:'storytelling', format:'horizontal' },
+  { id:'h4IK9U7npPk',  niche:'storytelling', format:'horizontal' },
+
+  /* ---------- VERTICAIS ---------- */
+  { id:'3-JCOvaV3PQ',  niche:'anime',    format:'vertical' },
+  { id:'axvuiXMCTsE',  niche:'anime',    format:'vertical' },
+  { id:'MGFgytiIqi0',  niche:'gameplay', format:'vertical' },
+  { id:'I8MYR7Y150c',  niche:'gameplay', format:'vertical' },
+  { id:'wf1AglOHoPc',  niche:'gameplay', format:'vertical' },
+  { id:'DkTtTPDBiVE',  niche:'podcast',  format:'vertical' },
+  { id:'k9nmCOjVR6c',  niche:'podcast',  format:'vertical' },
+  { id:'hZsaiaQCI3o',  niche:'gameplay', format:'vertical' },
+];
+
+
+/* =====================================================================
+   2. TEXTOS (traduções)
+   ===================================================================== */
   const i18n = {
     pt:{
       nav_home:"Início", nav_portfolio:"Portfólio", nav_about:"Sobre", nav_testimonials:"Depoimentos",
@@ -552,7 +482,10 @@
       hero_media_label:"Demoreel geral",
       portfolio_title:"Portfólio",
       portfolio_text:"Um recorte do que já saiu daqui. Filtra por formato e por nicho.",
-      niche_all:"Todos",
+      format_horizontal:"Horizontal", format_vertical:"Vertical",
+      niche_all:"Todos", niche_gameplay:"Gameplay", niche_vlogs:"Vlogs", niche_anime:"Anime",
+      niche_storytelling:"Storytelling", niche_podcast:"Podcast",
+      grid_empty:"Ainda não há vídeos nesse filtro.",
       about_title:"Sobre",
       about_p1:"<strong>Eu sou o Nero.</strong> Edito videos para a internet a mais de 4 anos. Ja trabalhei com diversos clientes diferentes, tanto em nicho quanto tamanho.",
       about_p2:"Se seu nicho não está no portfolio, me chama aqui embaixo que eu te passo um exemplo especifico pra você antes de fecharmos qualquer coisa!",
@@ -576,7 +509,10 @@
       hero_media_label:"General demo reel",
       portfolio_title:"Portfolio",
       portfolio_text:"A slice of what's come out of here. Filter by format and by niche.",
-      niche_all:"All",
+      format_horizontal:"Horizontal", format_vertical:"Vertical",
+      niche_all:"All", niche_gameplay:"Gameplay", niche_vlogs:"Vlogs", niche_anime:"Anime",
+      niche_storytelling:"Storytelling", niche_podcast:"Podcast",
+      grid_empty:"No videos in this filter yet.",
       about_title:"About",
       about_p1:"<strong>I'm Nero.</strong> I edit video for the internet — YouTube, Twitch clips, vertical, whatever it takes. I've cut content for big creators and for people just starting out, and I treat both the same way: I watch the full footage before deciding what stays.",
       about_p2:"If your niche isn't in the portfolio yet, I'll put together a demo reel for it before we close anything.",
@@ -593,96 +529,154 @@
     }
   };
 
-  const langToggle = document.getElementById('lang-toggle');
-  let currentLang = 'en';
 
-  function setLang(lang){
-    currentLang = lang;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if(i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
-    });
-    document.querySelectorAll('#lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-  }
+/* =====================================================================
+   3. ESTADO & HELPERS
+   ===================================================================== */
+const state = {
+  lang: 'en',
+  format: 'horizontal',
+  niche: 'all'
+};
 
-  langToggle.addEventListener('click', (e) => {
-    const btn = e.target.closest('button[data-lang]');
-    if(btn) setLang(btn.dataset.lang);
+const $  = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
+const t  = (key) => i18n[state.lang][key] ?? key;
+
+const PLAY_ICON = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+
+const getThumbUrl = (video) => video.thumb || `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+const getEmbedUrl = (video) => video.embed || `https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0`;
+
+// Vídeos do idioma atual (sem `langs` = aparece em todos os idiomas)
+const videosForCurrentLang = () =>
+  VIDEOS.filter(video => !video.langs || video.langs.includes(state.lang));
+
+
+/* =====================================================================
+   4. PORTFÓLIO
+   ===================================================================== */
+const formatToggle = $('#format-toggle');
+const nichePills   = $('#niche-pills');
+const grid         = $('#grid');
+
+function closeAllPlayers() {
+  $$('.player-container').forEach(player => {
+    player.style.display = 'none';
+    player.innerHTML = '';
   });
+}
 
-  const browserLang = navigator.language || navigator.userLanguage;
-  if(browserLang && browserLang.startsWith('pt')){
-    setLang('pt');
-  } else {
-    setLang('en');
-  }
+function renderFormatButtons() {
+  formatToggle.querySelectorAll('button').forEach(btn =>
+    btn.classList.toggle('active', btn.dataset.format === state.format));
+}
 
-  const hamburger = document.getElementById('btn-hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+function renderNichePills(availableNiches) {
+  const niches = ['all', ...availableNiches];
+  nichePills.innerHTML = niches.map(niche => `
+    <button type="button" data-niche="${niche}" class="${niche === state.niche ? 'active' : ''}">
+      ${t('niche_' + niche)}
+    </button>`).join('');
+}
 
-  const formatButtons = document.querySelectorAll('#format-toggle button');
-  const nicheButtons = document.querySelectorAll('#niche-pills button');
-  const cards = document.querySelectorAll('#grid .card');
-  const gridContainer = document.getElementById('grid');
-  let currentFormat = 'youtube';
-  let currentNiche = 'todos';
+function renderCard(video) {
+  return `
+    <div class="card ${video.format}">
+      <button type="button" class="thumb" data-embed="${getEmbedUrl(video)}"
+              style="background-image:url('${getThumbUrl(video)}')">
+        <span class="thumb-tag">${t('niche_' + video.niche)}</span>
+        <span class="thumb-play">${PLAY_ICON}</span>
+      </button>
+      <div class="player-container"></div>
+    </div>`;
+}
 
-  function applyFilter(){
-    // Reset players
-    document.querySelectorAll('.player-container').forEach(p => {
-      p.style.display = 'none';
-      p.innerHTML = '';
-    });
+function renderPortfolio() {
+  // Vídeos do idioma + formato atuais
+  const pool = videosForCurrentLang().filter(video => video.format === state.format);
 
-    if(currentFormat === 'shorts'){
-      gridContainer.classList.add('shorts-grid');
-    } else {
-      gridContainer.classList.remove('shorts-grid');
-    }
+  // Só mostra nichos que têm vídeo nesse idioma/formato
+  const availableNiches = NICHES.filter(niche => pool.some(video => video.niche === niche));
+  if (state.niche !== 'all' && !availableNiches.includes(state.niche)) state.niche = 'all';
 
-    cards.forEach(card => {
-      const matchesFormat = card.dataset.format === currentFormat;
-      const matchesNiche = currentNiche === 'todos' || card.dataset.niche === currentNiche;
-      card.classList.toggle('hide', !(matchesFormat && matchesNiche));
-    });
-  }
+  const visible = pool.filter(video => state.niche === 'all' || video.niche === state.niche);
 
-  formatButtons.forEach(btn => btn.addEventListener('click', () => {
-    formatButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFormat = btn.dataset.format;
-    applyFilter();
-  }));
+  renderFormatButtons();
+  renderNichePills(availableNiches);
+  grid.classList.toggle('vertical-grid', state.format === 'vertical');
+  grid.innerHTML = visible.length
+    ? visible.map(renderCard).join('')
+    : `<p class="grid-empty">${t('grid_empty')}</p>`;
+}
 
-  nicheButtons.forEach(btn => btn.addEventListener('click', () => {
-    nicheButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentNiche = btn.dataset.niche;
-    applyFilter();
-  }));
+formatToggle.addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-format]');
+  if (!btn) return;
+  state.format = btn.dataset.format;
+  renderPortfolio();
+});
 
-  // Lógica para tocar o vídeo no próprio card ao clicar no thumbnail
-  cards.forEach(card => {
-    const thumb = card.querySelector('.thumb');
-    const playerContainer = card.querySelector('.player-container');
-    const videoId = card.getAttribute('data-video-id');
+nichePills.addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-niche]');
+  if (!btn) return;
+  state.niche = btn.dataset.niche;
+  renderPortfolio();
+});
 
-    thumb.addEventListener('click', () => {
-      document.querySelectorAll('.player-container').forEach(p => {
-        p.style.display = 'none';
-        p.innerHTML = '';
-      });
+// Clicar na capa troca ela pelo player, dentro do próprio card
+grid.addEventListener('click', (e) => {
+  const thumb = e.target.closest('.thumb');
+  if (!thumb) return;
+  closeAllPlayers();
+  const player = thumb.parentElement.querySelector('.player-container');
+  player.innerHTML = `<iframe src="${thumb.dataset.embed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  player.style.display = 'block';
+});
 
-      if(videoId && playerContainer) {
-        playerContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-        playerContainer.style.display = 'block';
-      }
-    });
+
+/* =====================================================================
+   5. IDIOMA
+   ===================================================================== */
+const heroVideo = $('#hero-video');
+
+function renderHeroVideo() {
+  const url = `https://www.youtube.com/embed/${HERO_VIDEO[state.lang]}`;
+  if (heroVideo.getAttribute('src') !== url) heroVideo.src = url;   // evita recarregar se for o mesmo vídeo
+  heroVideo.title = t('hero_media_label');
+}
+
+function setLang(lang) {
+  state.lang = lang;
+
+  $$('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
   });
+  $$('#lang-toggle button').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
-  applyFilter();
+  renderHeroVideo();
+  renderPortfolio();   // refaz o grid com os vídeos e textos do novo idioma
+}
+
+$('#lang-toggle').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-lang]');
+  if (btn) setLang(btn.dataset.lang);
+});
+
+
+/* =====================================================================
+   6. NAV MOBILE
+   ===================================================================== */
+$('#btn-hamburger').addEventListener('click', () => $('#mobile-menu').classList.toggle('open'));
+
+
+/* =====================================================================
+   7. INICIALIZAÇÃO
+   ===================================================================== */
+const browserLang = navigator.language || navigator.userLanguage || '';
+setLang(browserLang.startsWith('pt') ? 'pt' : 'en');
 </script>
 </body>
 </html>
