@@ -4,6 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nero Editor — Portfólio</title>
+<meta name="description" content="Portfólio de edição de vídeo · Video editing portfolio. Gameplay, vlogs, anime, storytelling e podcast.">
+<meta name="theme-color" content="#08080a">
+
+<!-- PREVIEW DO LINK (Discord, WhatsApp, Twitter etc.)
+     Esses robôs NÃO executam JavaScript, então o texto aqui é fixo (bilíngue de propósito).
+     A imagem precisa de URL completa (com https://) e o arquivo og-image.png
+     deve ficar na mesma pasta do index.html. Se mudar o domínio, troque abaixo. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nero Editor">
+<meta property="og:title" content="Nero Editor — Editor de Vídeo · Video Editor">
+<meta property="og:description" content="Portfólio de edição de vídeo · Video editing portfolio">
+<meta property="og:url" content="https://neroeditportfolio.vercel.app/">
+<meta property="og:image" content="https://neroeditportfolio.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nero Editor — Editor de Vídeo · Video Editor">
+<meta name="twitter:description" content="Portfólio de edição de vídeo · Video editing portfolio">
+<meta name="twitter:image" content="https://neroeditportfolio.vercel.app/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -415,7 +434,7 @@
    ---------------------------------------------------------------------
    Cada vídeo é uma linha em VIDEOS:
 
-     { id:'ID_DO_YOUTUBE', niche:'gameplay', format:'horizontal' }
+     { id:'ID_DO_YOUTUBE', niche:'gameplay', format:'horizontal' lang:['pt'] or lang:['en'] }
 
    Campos:
      id      ID do vídeo no YouTube (a parte depois de ?v= ou de /shorts/)
@@ -446,44 +465,25 @@ const NICHES = ['gameplay', 'vlogs', 'anime', 'storytelling', 'podcast'];
 
 const VIDEOS = [
   /* ---------- HORIZONTAIS ---------- */
-  { id:'m81fSzFMRmc',  niche:'gameplay', format:'horizontal', langs:['pt'] },
-  { id:'s-dthYY1mQU',  niche:'gameplay', format:'horizontal', langs:['pt'] },
-  { id:'v54JkhiTSgQ',  niche:'vlogs',    format:'horizontal', langs:['pt'] },
-  { id:'FgP16GUatCs',  niche:'vlogs',    format:'horizontal', langs:['pt'] },
-  { id:'_MbCUv6ipDA',  niche:'anime',    format:'horizontal', langs:['pt'] },
-  { id:'Ydyl83zWv68',  niche:'gameplay', format:'horizontal', langs:['pt'] },
-  { id:'7hUfuBLI4gU',  niche:'vlogs',    format:'horizontal', langs:['pt'] },
-  { id:'vhljKePImKQ',  niche:'storytelling', format:'horizontal', langs:['pt'] },
-  { id:'h4IK9U7npPk',  niche:'storytelling', format:'horizontal', langs:['pt'] },
-
-  { id:'m81fSzFMRmc',  niche:'gameplay', format:'horizontal', langs:['en'] },
-  { id:'s-dthYY1mQU',  niche:'gameplay', format:'horizontal', langs:['en'] },
-  { id:'v54JkhiTSgQ',  niche:'vlogs',    format:'horizontal', langs:['en'] },
-  { id:'FgP16GUatCs',  niche:'vlogs',    format:'horizontal', langs:['en'] },
-  { id:'_MbCUv6ipDA',  niche:'anime',    format:'horizontal', langs:['en'] },
-  { id:'Ydyl83zWv68',  niche:'gameplay', format:'horizontal', langs:['en'] },
-  { id:'7hUfuBLI4gU',  niche:'vlogs',    format:'horizontal', langs:['en'] },
-  { id:'vhljKePImKQ',  niche:'storytelling', format:'horizontal', langs:['en'] },
-  { id:'h4IK9U7npPk',  niche:'storytelling', format:'horizontal', langs:['en'] },
+  { id:'m81fSzFMRmc',  niche:'gameplay', format:'horizontal' },
+  { id:'s-dthYY1mQU',  niche:'gameplay', format:'horizontal' },
+  { id:'v54JkhiTSgQ',  niche:'vlogs',    format:'horizontal' },
+  { id:'FgP16GUatCs',  niche:'vlogs',    format:'horizontal' },
+  { id:'_MbCUv6ipDA',  niche:'anime',    format:'horizontal' },
+  { id:'Ydyl83zWv68',  niche:'gameplay', format:'horizontal' },
+  { id:'7hUfuBLI4gU',  niche:'vlogs',    format:'horizontal' },
+  { id:'vhljKePImKQ',  niche:'storytelling', format:'horizontal' },
+  { id:'h4IK9U7npPk',  niche:'storytelling', format:'horizontal' },
 
   /* ---------- VERTICAIS ---------- */
-  { id:'3-JCOvaV3PQ',  niche:'anime',    format:'vertical', langs:['pt'] },
-  { id:'axvuiXMCTsE',  niche:'anime',    format:'vertical', langs:['pt'] },
-  { id:'MGFgytiIqi0',  niche:'gameplay', format:'vertical', langs:['pt'] },
-  { id:'I8MYR7Y150c',  niche:'gameplay', format:'vertical', langs:['pt'] },
-  { id:'wf1AglOHoPc',  niche:'gameplay', format:'vertical', langs:['pt'] },
-  { id:'DkTtTPDBiVE',  niche:'podcast',  format:'vertical', langs:['pt'] },
-  { id:'k9nmCOjVR6c',  niche:'podcast',  format:'vertical', langs:['pt'] },
-  { id:'hZsaiaQCI3o',  niche:'gameplay', format:'vertical', langs:['pt'] },
-
-  { id:'3-JCOvaV3PQ',  niche:'anime',    format:'vertical', langs:['en'] },
-  { id:'axvuiXMCTsE',  niche:'anime',    format:'vertical', langs:['en'] },
-  { id:'MGFgytiIqi0',  niche:'gameplay', format:'vertical', langs:['en'] },
-  { id:'I8MYR7Y150c',  niche:'gameplay', format:'vertical', langs:['en'] },
-  { id:'wf1AglOHoPc',  niche:'gameplay', format:'vertical', langs:['en'] },
-  { id:'DkTtTPDBiVE',  niche:'podcast',  format:'vertical', langs:['en'] },
-  { id:'k9nmCOjVR6c',  niche:'podcast',  format:'vertical', langs:['en'] },
-  { id:'hZsaiaQCI3o',  niche:'gameplay', format:'vertical', langs:['en'] },
+  { id:'3-JCOvaV3PQ',  niche:'anime',    format:'vertical' },
+  { id:'axvuiXMCTsE',  niche:'anime',    format:'vertical' },
+  { id:'MGFgytiIqi0',  niche:'gameplay', format:'vertical' },
+  { id:'I8MYR7Y150c',  niche:'gameplay', format:'vertical' },
+  { id:'wf1AglOHoPc',  niche:'gameplay', format:'vertical' },
+  { id:'DkTtTPDBiVE',  niche:'podcast',  format:'vertical' },
+  { id:'k9nmCOjVR6c',  niche:'podcast',  format:'vertical' },
+  { id:'hZsaiaQCI3o',  niche:'gameplay', format:'vertical' },
 ];
 
 
