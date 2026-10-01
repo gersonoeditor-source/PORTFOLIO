@@ -36,7 +36,7 @@
   img{max-width:100%;display:block;}
   button{font-family:inherit;cursor:pointer;}
 
-  /* ===================== NAV ===================== */
+  /* NAV */
   .site-nav{
     position:sticky;top:0;z-index:20;
     display:flex;align-items:center;justify-content:space-between;
@@ -72,7 +72,7 @@
   .mobile-menu a{padding:16px 24px;border-bottom:1px solid var(--border);font-size:15px;color:var(--white);}
   .mobile-menu .btn-wpp{margin:16px 24px;justify-content:center;}
 
-  /* ===================== HERO ===================== */
+  /* HERO */
   .hero{
     display:grid;grid-template-columns:1.05fr .95fr;gap:48px;
     padding:72px 40px 80px;align-items:center;
@@ -90,34 +90,18 @@
   }
   .hero-media{
     background:var(--panel);border:1px solid var(--border);border-radius:14px;
-    overflow:hidden;position:relative;
+    overflow:hidden;position:relative;aspect-ratio:16/9;
   }
-  .hero-media .frame{
-    aspect-ratio:16/10;background:
-      radial-gradient(120% 140% at 20% 15%, #2a1010 0%, #0c0c0e 55%);
-    display:flex;align-items:center;justify-content:center;position:relative;
+  .hero-media iframe{
+    width:100%;height:100%;border:none;display:block;
   }
-  .play-btn{
-    width:60px;height:60px;border-radius:50%;background:rgba(255,59,63,.92);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .play-btn svg{width:22px;height:22px;fill:#1a0000;margin-left:3px;}
-  .hero-media .label{
-    position:absolute;top:16px;left:16px;font-size:12px;font-weight:600;color:var(--gray);
-    background:rgba(0,0,0,.5);padding:5px 10px;border-radius:6px;
-  }
-  .scrubber{padding:14px 16px;display:flex;align-items:center;gap:10px;}
-  .scrubber .bar{flex:1;height:4px;background:var(--border);border-radius:99px;position:relative;overflow:hidden;}
-  .scrubber .bar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:36%;background:var(--red);}
-  .scrubber time{font-size:11px;color:var(--gray);font-variant-numeric:tabular-nums;}
 
-  /* ===================== SECTION SHELL ===================== */
+  /* PORTFOLIO */
   section{padding:80px 40px;}
   .section-head{max-width:60ch;margin-bottom:40px;}
   .section-head h2{font-size:30px;margin:0 0 10px;font-weight:700;}
   .section-head p{color:var(--gray);font-size:15px;margin:0;line-height:1.6;}
 
-  /* ===================== PORTFOLIO ===================== */
   #portfolio{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .format-toggle{
     display:inline-flex;background:var(--black);border:1px solid var(--border);
@@ -136,88 +120,51 @@
   }
   .niche-pills button.active{color:var(--white);border-color:var(--red);}
 
+  /* GRID DE VÍDEOS */
   .grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+    display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;
+  }
+  .grid.shorts-grid{
+    grid-template-columns:repeat(4, 1fr);
   }
   .card{
     background:var(--black);border:1px solid var(--border);border-radius:12px;overflow:hidden;
-    display:flex;flex-direction:column; cursor:pointer;
+    display:flex;flex-direction:column;position:relative;
   }
-  .card.hide{display:none;}
+  .card.hide{display:none !important;}
   .card .thumb{
     aspect-ratio:16/9;position:relative;display:flex;align-items:center;justify-content:center;
-    color:rgba(245,243,239,.55);font-size:13px;font-weight:600;
-    background-size: cover; background-position: center;
+    background-size: cover; background-position: center; cursor:pointer;
   }
   .card.shorts .thumb{aspect-ratio:9/16;}
-  .thumb-gameplay{background-color: #210b0c;}
-  .thumb-vlogs{background-color: #1a1108;}
-  .thumb-anime{background-color: #0c1220;}
   .thumb-play{
-    position:absolute;width:38px;height:38px;border-radius:50%;
-    background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.25);
+    position:absolute;width:44px;height:44px;border-radius:50%;
+    background:rgba(255,59,63,.9);
     display:flex;align-items:center;justify-content:center;
+    transition:transform .2s ease;
   }
-  .thumb-play svg{width:14px;height:14px;fill:#fff;margin-left:2px;}
+  .card:hover .thumb-play{transform:scale(1.1);}
+  .thumb-play svg{width:16px;height:16px;fill:#1a0000;margin-left:2px;}
   .thumb-tag{
-    position:absolute;top:8px;left:8px;font-size:10px;font-weight:700;color:var(--white);
-    background:rgba(0,0,0,.55);padding:3px 7px;border-radius:5px;
+    position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;color:var(--white);
+    background:rgba(0,0,0,.7);padding:4px 8px;border-radius:6px;z-index:2;
   }
+  .player-container{
+    width:100%;height:100%;display:none;position:absolute;top:0;left:0;z-index:5;background:#000;
+  }
+  .player-container iframe{width:100%;height:100%;border:none;}
 
-  /* ===================== MODAL DE VÍDEO ===================== */
-  .video-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-  }
-  .video-modal.open {
-    display: flex;
-  }
-  .modal-content {
-    position: relative;
-    width: 80%;
-    max-width: 800px;
-    aspect-ratio: 16/9;
-    background: #000;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .modal-content iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  .close-modal {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  /* ===================== ABOUT ===================== */
+  /* ABOUT */
   .about{display:grid;grid-template-columns:auto 1.2fr;gap:48px;align-items:center;}
   .about-photo{
-    width:280px;
-    height:280px;
-    border-radius:14px;
-    background:linear-gradient(160deg,#2a0d0f,#0a0a0c 65%);
+    width:280px;height:280px;border-radius:14px;
     border:1px solid var(--border);
     background-image: url('3coQc3NL_400x400.jpg'); background-size: cover; background-position: center;
   }
   .about-text p{font-size:15px;line-height:1.7;color:var(--gray);margin:0 0 16px;max-width:56ch;}
   .about-text strong{color:var(--white);}
 
-  /* ===================== TESTIMONIALS ===================== */
+  /* TESTIMONIALS */
   #testimonials{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
   .testi-card{
@@ -232,7 +179,7 @@
   .testi-quote{font-size:14px;line-height:1.55;color:var(--white);position:relative;padding-left:2px;}
   .testi-source{font-size:11px;color:var(--gray);border-top:1px solid var(--border);padding-top:12px;}
 
-  /* ===================== FINAL CTA ===================== */
+  /* FINAL CTA */
   .final-cta{text-align:left;background:var(--black);}
   .final-cta h2{font-size:32px;margin:0 0 14px;max-width:16ch;}
   .final-cta p{color:var(--gray);font-size:15px;margin:0 0 26px;max-width:44ch;}
@@ -255,46 +202,34 @@
   footer .brand{font-size:15px;}
   footer small{color:var(--gray);font-size:12px;}
 
-  /* ===================== FLOATING WHATSAPP ===================== */
+  /* FLOATING WHATSAPP */
   .float-wpp{
     position:fixed;right:22px;bottom:22px;z-index:50;
     background:var(--red);color:#1a0000;border:none;border-radius:999px;
     display:flex;align-items:center;gap:8px;padding:13px 18px;font-weight:700;font-size:14px;
     box-shadow:0 10px 24px rgba(0,0,0,.4);
-    transition:padding .2s ease, width .2s ease;
   }
   .float-wpp svg{width:18px;height:18px;flex-shrink:0;}
-  .float-wpp span{white-space:nowrap;overflow:hidden;}
-  .float-wpp.compact{padding:13px;}
-  .float-wpp.compact span{display:none;}
 
-  /* ===================== RESPONSIVO ===================== */
+  /* RESPONSIVO */
+  @media (max-width: 900px){
+    .grid, .grid.shorts-grid{grid-template-columns:repeat(2,1fr);}
+  }
   @media (max-width: 768px){
     .site-nav{padding:14px 18px;}
     .nav-links{display:none;}
-    .nav-right{gap:10px;}
     .nav-right .btn-wpp{display:none;}
     .hamburger{display:flex;}
 
     .hero{grid-template-columns:1fr;padding:36px 20px 56px;gap:32px;}
-    .hero h1{font-size:30px;max-width:none;}
-    .hero p{max-width:none;}
+    .hero h1{font-size:30px;}
 
     section{padding:56px 20px;}
-    .section-head h2{font-size:24px;}
-
-    .grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+    .grid, .grid.shorts-grid{grid-template-columns:1fr;}
 
     .about{grid-template-columns:1fr;}
     .about-photo{width:100%;max-width:280px;aspect-ratio:1/1;}
-
     .testi-grid{grid-template-columns:1fr;}
-
-    .final-cta h2{font-size:26px;max-width:none;}
-
-    footer{flex-direction:column;align-items:flex-start;}
-
-    .float-wpp{right:16px;bottom:16px;}
   }
 </style>
 </head>
@@ -302,7 +237,7 @@
 
   <div id="site">
 
-    <!-- ===================== NAV ===================== -->
+    <!-- NAV -->
     <nav class="site-nav">
       <div class="brand"><span class="dot"></span>NERO EDITOR</div>
       <ul class="nav-links">
@@ -316,7 +251,7 @@
           <button data-lang="pt">PT</button>
           <button data-lang="en" class="active">EN</button>
         </div>
-        <a href="https://wa.me/556492216099" class="btn-wpp">
+        <a href="https://wa.me/556492216099" class="btn-wpp" target="_blank">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.2.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5-.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>
           <span data-i18n="nav_wpp">Chat on WhatsApp</span>
         </a>
@@ -330,16 +265,16 @@
       <a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a>
       <a href="#sobre" data-i18n="nav_about">About</a>
       <a href="#depoimentos" data-i18n="nav_testimonials">Testimonials</a>
-      <a href="https://wa.me/556492216099" class="btn-wpp"><span data-i18n="nav_wpp">Chat on WhatsApp</span></a>
+      <a href="https://wa.me/556492216099" class="btn-wpp" target="_blank"><span data-i18n="nav_wpp">Chat on WhatsApp</span></a>
     </div>
 
-    <!-- ===================== HERO ===================== -->
+    <!-- HERO -->
     <div class="hero" id="inicio">
       <div>
         <h1 data-i18n="hero_title">Your video, cut the right way for your niche.</h1>
         <p data-i18n="hero_text">I edit gameplay, vlogs, anime and vertical content. You send the raw footage, I send back something ready to post — with the pacing that format needs.</p>
         <div class="hero-ctas">
-          <a href="https://wa.me/556492216099" class="btn-primary">
+          <a href="https://wa.me/556492216099" class="btn-primary" target="_blank">
             <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z"/></svg>
             <span data-i18n="nav_wpp">Chat on WhatsApp</span>
           </a>
@@ -347,19 +282,11 @@
         </div>
       </div>
       <div class="hero-media">
-        <div class="frame">
-          <span class="label" data-i18n="hero_media_label">General demo reel</span>
-          <div class="play-btn" data-video-id="-M70DAdB1VY"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="scrubber">
-          <time>0:14</time>
-          <div class="bar"></div>
-          <time>0:42</time>
-        </div>
+        <iframe src="https://www.youtube.com/embed/-M70DAdB1VY" title="General Demo Reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
 
-    <!-- ===================== PORTFÓLIO ===================== -->
+    <!-- PORTFÓLIO -->
     <section id="portfolio">
       <div class="section-head">
         <h2 data-i18n="portfolio_title">Portfolio</h2>
@@ -382,134 +309,148 @@
 
       <div class="grid" id="grid">
 
-        <!-- ==================== VIDEOS HORIZONTAIS (YOUTUBE) ==================== -->
-        
-        <div class="card" data-format="youtube" data-niche="gameplay" data-lang="pt" data-video-id="m81fSzFMRmc">
-          <div class="thumb thumb-gameplay" style="background-image: url('https://img.youtube.com/vi/m81fSzFMRmc/hqdefault.jpg');">
+        <!-- HORIZONTAIS (YOUTUBE) -->
+        <div class="card" data-format="youtube" data-niche="gameplay" data-video-id="m81fSzFMRmc">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/m81fSzFMRmc/hqdefault.jpg');">
             <span class="thumb-tag">Gameplay</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card" data-format="youtube" data-niche="gameplay" data-lang="pt" data-video-id="s-dthYY1mQU">
-          <div class="thumb thumb-gameplay" style="background-image: url('https://img.youtube.com/vi/s-dthYY1mQU/hqdefault.jpg');">
+        <div class="card" data-format="youtube" data-niche="gameplay" data-video-id="s-dthYY1mQU">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/s-dthYY1mQU/hqdefault.jpg');">
             <span class="thumb-tag">Gameplay</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card" data-format="youtube" data-niche="vlogs" data-lang="pt" data-video-id="v54JkhiTSgQ">
-          <div class="thumb thumb-vlogs" style="background-image: url('https://img.youtube.com/vi/v54JkhiTSgQ/hqdefault.jpg');">
+        <div class="card" data-format="youtube" data-niche="vlogs" data-video-id="v54JkhiTSgQ">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/v54JkhiTSgQ/hqdefault.jpg');">
             <span class="thumb-tag">Vlog</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card" data-format="youtube" data-niche="vlogs" data-lang="pt" data-video-id="FgP16GUatCs">
-          <div class="thumb thumb-vlogs" style="background-image: url('https://img.youtube.com/vi/FgP16GUatCs/hqdefault.jpg');">
+        <div class="card" data-format="youtube" data-niche="vlogs" data-video-id="FgP16GUatCs">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/FgP16GUatCs/hqdefault.jpg');">
             <span class="thumb-tag">Vlog</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card" data-format="youtube" data-niche="anime" data-lang="pt" data-video-id="_MbCUv6ipDA">
-          <div class="thumb thumb-anime" style="background-image: url('https://img.youtube.com/vi/_MbCUv6ipDA/hqdefault.jpg');">
+        <div class="card" data-format="youtube" data-niche="anime" data-video-id="_MbCUv6ipDA">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/_MbCUv6ipDA/hqdefault.jpg');">
             <span class="thumb-tag">Anime</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card" data-format="youtube" data-niche="gameplay" data-lang="pt" data-video-id="Ydyl83zWv68">
-          <div class="thumb thumb-gameplay" style="background-image: url('https://img.youtube.com/vi/Ydyl83zWv68/hqdefault.jpg');">
+        <div class="card" data-format="youtube" data-niche="gameplay" data-video-id="Ydyl83zWv68">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/Ydyl83zWv68/hqdefault.jpg');">
             <span class="thumb-tag">Gameplay</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card" data-format="youtube" data-niche="vlogs" data-lang="pt" data-video-id="7hUfuBLI4gU">
-          <div class="thumb thumb-vlogs" style="background-image: url('https://img.youtube.com/vi/7hUfuBLI4gU/hqdefault.jpg');">
+        <div class="card" data-format="youtube" data-niche="vlogs" data-video-id="7hUfuBLI4gU">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/7hUfuBLI4gU/hqdefault.jpg');">
             <span class="thumb-tag">Vlog</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card" data-format="youtube" data-niche="storytelling" data-lang="pt" data-video-id="vhljKePImKQ">
-          <div class="thumb thumb-vlogs" style="background-image: url('https://img.youtube.com/vi/vhljKePImKQ/hqdefault.jpg');">
+        <div class="card" data-format="youtube" data-niche="storytelling" data-video-id="vhljKePImKQ">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/vhljKePImKQ/hqdefault.jpg');">
             <span class="thumb-tag">Storytelling</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card" data-format="youtube" data-niche="storytelling" data-lang="pt" data-video-id="h4IK9U7npPk">
-          <div class="thumb thumb-vlogs" style="background-image: url('https://img.youtube.com/vi/h4IK9U7npPk/hqdefault.jpg');">
+        <div class="card" data-format="youtube" data-niche="storytelling" data-video-id="h4IK9U7npPk">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/h4IK9U7npPk/hqdefault.jpg');">
             <span class="thumb-tag">Storytelling</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-
-        <!-- ==================== VIDEOS VERTICAIS (SHORTS/REELS) ==================== -->
-
-        <div class="card shorts" data-format="shorts" data-niche="anime" data-lang="pt" data-video-id="3-JCOvaV3PQ">
-          <div class="thumb thumb-anime" style="background-image: url('https://img.youtube.com/vi/3-JCOvaV3PQ/hqdefault.jpg');">
+        <!-- VERTICAIS (SHORTS/REELS) -->
+        <div class="card shorts" data-format="shorts" data-niche="anime" data-video-id="3-JCOvaV3PQ">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/3-JCOvaV3PQ/hqdefault.jpg');">
             <span class="thumb-tag">Anime</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card shorts" data-format="shorts" data-niche="anime" data-lang="pt" data-video-id="axvuiXMCTsE">
-          <div class="thumb thumb-anime" style="background-image: url('https://img.youtube.com/vi/axvuiXMCTsE/hqdefault.jpg');">
+        <div class="card shorts" data-format="shorts" data-niche="anime" data-video-id="axvuiXMCTsE">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/axvuiXMCTsE/hqdefault.jpg');">
             <span class="thumb-tag">Anime</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-lang="pt" data-video-id="MGFgytiIqi0">
-          <div class="thumb thumb-gameplay" style="background-image: url('https://img.youtube.com/vi/MGFgytiIqi0/hqdefault.jpg');">
+        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-video-id="MGFgytiIqi0">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/MGFgytiIqi0/hqdefault.jpg');">
             <span class="thumb-tag">Gameplay</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-lang="pt" data-video-id="I8MYR7Y150c">
-          <div class="thumb thumb-gameplay" style="background-image: url('https://img.youtube.com/vi/I8MYR7Y150c/hqdefault.jpg');">
+        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-video-id="I8MYR7Y150c">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/I8MYR7Y150c/hqdefault.jpg');">
             <span class="thumb-tag">Gameplay</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-lang="pt" data-video-id="wf1AglOHoPc">
-          <div class="thumb thumb-gameplay" style="background-image: url('https://img.youtube.com/vi/wf1AglOHoPc/hqdefault.jpg');">
+        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-video-id="wf1AglOHoPc">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/wf1AglOHoPc/hqdefault.jpg');">
             <span class="thumb-tag">Gameplay</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card shorts" data-format="shorts" data-niche="podcast" data-lang="pt" data-video-id="DkTtTPDBiVE">
-          <div class="thumb thumb-vlogs" style="background-image: url('https://img.youtube.com/vi/DkTtTPDBiVE/hqdefault.jpg');">
+        <div class="card shorts" data-format="shorts" data-niche="podcast" data-video-id="DkTtTPDBiVE">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/DkTtTPDBiVE/hqdefault.jpg');">
             <span class="thumb-tag">Podcast</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card shorts" data-format="shorts" data-niche="podcast" data-lang="pt" data-video-id="k9nmCOjVR6c">
-          <div class="thumb thumb-vlogs" style="background-image: url('https://img.youtube.com/vi/k9nmCOjVR6c/hqdefault.jpg');">
+        <div class="card shorts" data-format="shorts" data-niche="podcast" data-video-id="k9nmCOjVR6c">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/k9nmCOjVR6c/hqdefault.jpg');">
             <span class="thumb-tag">Podcast</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
-        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-lang="pt" data-video-id="hZsaiaQCI3o">
-          <div class="thumb thumb-gameplay" style="background-image: url('https://img.youtube.com/vi/hZsaiaQCI3o/hqdefault.jpg');">
+        <div class="card shorts" data-format="shorts" data-niche="gameplay" data-video-id="hZsaiaQCI3o">
+          <div class="thumb" style="background-image: url('https://img.youtube.com/vi/hZsaiaQCI3o/hqdefault.jpg');">
             <span class="thumb-tag">Gameplay</span>
             <div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
+          <div class="player-container"></div>
         </div>
 
       </div>
     </section>
 
-    <!-- ===================== SOBRE ===================== -->
+    <!-- SOBRE -->
     <section id="sobre">
       <div class="about">
         <div class="about-photo"></div>
@@ -519,12 +460,12 @@
           </div>
           <p data-i18n="about_p1"><strong>Eu sou o Nero.</strong> Edito videos para a internet a mais de 4 anos. Ja trabalhei com diversos clientes diferentes, tanto em nicho quanto tamanho.</p>
           <p data-i18n="about_p2">Se seu nicho não está no portfolio, me chama aqui embaixo que eu te passo um exemplo especifico pra você antes de fecharmos qualquer coisa!</p>
-          <a href="https://wa.me/556492216099" class="btn-ghost" data-i18n="about_cta">Get in touch</a>
+          <a href="https://wa.me/556492216099" class="btn-ghost" data-i18n="about_cta" target="_blank">Get in touch</a>
         </div>
       </div>
     </section>
 
-    <!-- ===================== DEPOIMENTOS ===================== -->
+    <!-- DEPOIMENTOS -->
     <section id="depoimentos">
       <div class="section-head">
         <h2 data-i18n="testi_title">What people say</h2>
@@ -567,11 +508,11 @@
       </div>
     </section>
 
-    <!-- ===================== CTA FINAL ===================== -->
+    <!-- FINAL CTA -->
     <section class="final-cta">
       <h2 data-i18n="final_title">Send your material</h2>
       <p data-i18n="final_text">Quick reply, no runaround. Message me on WhatsApp and we'll sort out format, deadline and price.</p>
-      <a href="https://wa.me/556492216099" class="btn-primary">
+      <a href="https://wa.me/556492216099" class="btn-primary" target="_blank">
         <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z"/></svg>
         <span data-i18n="nav_wpp">Chat on WhatsApp</span>
       </a>
@@ -592,26 +533,18 @@
       <small data-i18n="footer_text">© 2026 Nero Editor · video editing</small>
     </footer>
 
-    <!-- ===================== WHATSAPP FLUTUANTE ===================== -->
-    <a href="https://wa.me/556492216099" class="float-wpp" id="float-wpp">
+    <!-- WHATSAPP FLUTUANTE -->
+    <a href="https://wa.me/556492216099" class="float-wpp" id="float-wpp" target="_blank">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z"/></svg>
       <span data-i18n="float_wpp">Message me</span>
     </a>
 
   </div>
 
-  <!-- ===================== MODAL / JANELA DE VÍDEO ===================== -->
-  <div class="video-modal" id="video-modal">
-    <div class="modal-content">
-      <button class="close-modal" id="close-modal">&times;</button>
-      <iframe id="youtube-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </div>
-  </div>
-
 <script>
   const i18n = {
     pt:{
-      nav_home:"Início", nav_portfolio:"Portfólio", nav_sobre:"Sobre", nav_testimonials:"Depoimentos",
+      nav_home:"Início", nav_portfolio:"Portfólio", nav_about:"Sobre", nav_testimonials:"Depoimentos",
       nav_wpp:"Falar no WhatsApp",
       hero_title:"Seu vídeo, cortado do jeito certo pro seu nicho.",
       hero_text:"Edito pra gameplay, vlog, anime e conteúdo vertical. Você manda o bruto, eu devolvo pronto — com o ritmo que aquele formato pede.",
@@ -671,7 +604,6 @@
     });
     document.querySelectorAll('#lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-    applyFilter();
   }
 
   langToggle.addEventListener('click', (e) => {
@@ -693,15 +625,27 @@
   const formatButtons = document.querySelectorAll('#format-toggle button');
   const nicheButtons = document.querySelectorAll('#niche-pills button');
   const cards = document.querySelectorAll('#grid .card');
+  const gridContainer = document.getElementById('grid');
   let currentFormat = 'youtube';
   let currentNiche = 'todos';
 
   function applyFilter(){
+    // Reset players
+    document.querySelectorAll('.player-container').forEach(p => {
+      p.style.display = 'none';
+      p.innerHTML = '';
+    });
+
+    if(currentFormat === 'shorts'){
+      gridContainer.classList.add('shorts-grid');
+    } else {
+      gridContainer.classList.remove('shorts-grid');
+    }
+
     cards.forEach(card => {
       const matchesFormat = card.dataset.format === currentFormat;
       const matchesNiche = currentNiche === 'todos' || card.dataset.niche === currentNiche;
-      const matchesLang = card.dataset.lang === currentLang;
-      card.classList.toggle('hide', !(matchesFormat && matchesNiche && matchesLang));
+      card.classList.toggle('hide', !(matchesFormat && matchesNiche));
     });
   }
 
@@ -719,43 +663,26 @@
     applyFilter();
   }));
 
-  // ---- LÓGICA DO MODAL DE VÍDEO (Abre o YouTube na tela) ----
-  const modal = document.getElementById('video-modal');
-  const iframe = document.getElementById('youtube-iframe');
-  const closeModal = document.getElementById('close-modal');
+  // Lógica para tocar o vídeo no próprio card ao clicar no thumbnail
+  cards.forEach(card => {
+    const thumb = card.querySelector('.thumb');
+    const playerContainer = card.querySelector('.player-container');
+    const videoId = card.getAttribute('data-video-id');
 
-  // Abre ao clicar nos cards do portfólio ou no vídeo do Hero
-  document.querySelectorAll('.card, .play-btn').forEach(item => {
-    item.addEventListener('click', () => {
-      const videoId = item.getAttribute('data-video-id');
-      if(videoId){
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-        modal.classList.add('open');
+    thumb.addEventListener('click', () => {
+      document.querySelectorAll('.player-container').forEach(p => {
+        p.style.display = 'none';
+        p.innerHTML = '';
+      });
+
+      if(videoId && playerContainer) {
+        playerContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        playerContainer.style.display = 'block';
       }
     });
   });
 
-  // Fecha o modal e para o vídeo
-  function closeVideoModal() {
-    modal.classList.remove('open');
-    iframe.src = '';
-  }
-
-  closeModal.addEventListener('click', closeVideoModal);
-  modal.addEventListener('click', (e) => {
-    if(e.target === modal) closeVideoModal();
-  });
-
-  const floatWpp = document.getElementById('float-wpp');
-  const portfolioSection = document.getElementById('portfolio');
-  const siteEl = document.getElementById('site');
-  siteEl.addEventListener('scroll', handleScroll, {passive:true});
-  window.addEventListener('scroll', handleScroll, {passive:true});
-  function handleScroll(){
-    const rect = portfolioSection.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
-    floatWpp.classList.toggle('compact', inView);
-  }
+  applyFilter();
 </script>
 </body>
 </html>
