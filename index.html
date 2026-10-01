@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -23,10 +23,11 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:#000;
+    background:var(--black);
     color:var(--white);
     font-family:'Inter',system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
   h1,h2,h3,.brand,.pill,.nav-links a{
     font-family:'Space Grotesk',system-ui,sans-serif;
@@ -34,32 +35,6 @@
   a{color:inherit;text-decoration:none;}
   img{max-width:100%;display:block;}
   button{font-family:inherit;cursor:pointer;}
-
-  /* ===================== PREVIEW CONTROL BAR (remover ao entregar pro programador) ===================== */
-  #preview-controls{
-    position:sticky;top:0;z-index:100;
-    display:flex;align-items:center;justify-content:center;gap:10px;
-    background:#000;border-bottom:1px solid var(--border);
-    padding:10px 14px;font-size:13px;color:var(--gray);
-  }
-  #preview-controls strong{color:var(--white);font-weight:600;margin-right:6px;}
-  #preview-controls button{
-    background:var(--panel);color:var(--gray);border:1px solid var(--border);
-    padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;
-    transition:background .15s ease, color .15s ease, border-color .15s ease;
-  }
-  #preview-controls button.active{background:var(--red);color:#1a0000;border-color:var(--red);}
-  #preview-note{font-size:12px;color:#5c5c62;}
-
-  /* ===================== FRAME (só existe pra simular o toggle de preview) ===================== */
-  #frame-outer{display:flex;justify-content:center;background:#000;padding:0;}
-  #frame-wrapper{width:100%;transition:width .35s ease;}
-  #frame-wrapper.mobile-preview{
-    width:400px;margin:28px auto;border:10px solid #000;border-radius:38px;
-    box-shadow:0 0 0 2px #333, 0 30px 70px rgba(0,0,0,.65);
-    overflow:hidden;
-  }
-  #site{container-type:inline-size;container-name:site;background:var(--black);overflow-x:hidden;}
 
   /* ===================== NAV ===================== */
   .site-nav{
@@ -187,28 +162,17 @@
     position:absolute;top:8px;left:8px;font-size:10px;font-weight:700;color:var(--white);
     background:rgba(0,0,0,.55);padding:3px 7px;border-radius:5px;
   }
-  .thumb-dur{
-    position:absolute;bottom:8px;right:8px;font-size:10px;font-weight:600;color:var(--white);
-    background:rgba(0,0,0,.6);padding:2px 6px;border-radius:4px;
-  }
-  .card .meta{padding:12px 14px 14px;}
-  .card .meta h4{font-size:14px;margin:0 0 4px;font-weight:600;line-height:1.35;}
-  .card .meta span{font-size:12px;color:var(--gray);}
-
-  /* ===================== COLABS ===================== */
-  .collab-row{display:flex;gap:20px;flex-wrap:wrap;}
-  .avatar{
-    width:56px;height:56px;border-radius:50%;background:var(--panel-2);
-    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;
-    color:var(--gray);border:1px solid var(--border);
-  }
 
   /* ===================== ABOUT ===================== */
-  .about{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:center;}
+  .about{display:grid;grid-template-columns:auto 1.2fr;gap:48px;align-items:center;}
   .about-photo{
-    aspect-ratio:4/5;border-radius:14px;
+    width:280px;
+    height:280px;
+    border-radius:14px;
     background:linear-gradient(160deg,#2a0d0f,#0a0a0c 65%);
     border:1px solid var(--border);
+    /* DICA: Para colocar a imagem 2 aqui, descomente a linha abaixo e coloque o nome do arquivo da sua foto: */
+    background-image: url('3coQc3NL_400x400.jpg'); background-size: cover; background-position: center;
   }
   .about-text p{font-size:15px;line-height:1.7;color:var(--gray);margin:0 0 16px;max-width:56ch;}
   .about-text strong{color:var(--white);}
@@ -221,7 +185,7 @@
     display:flex;flex-direction:column;gap:14px;
   }
   .testi-top{display:flex;align-items:center;gap:10px;}
-  .testi-top .avatar{width:38px;height:38px;font-size:12px;}
+  .testi-top .avatar{width:38px;height:38px;font-size:12px;border-radius:50%;background:var(--panel-2);display:flex;align-items:center;justify-content:center;color:var(--gray);border:1px solid var(--border);}
   .testi-name{font-size:14px;font-weight:600;display:flex;align-items:center;gap:5px;}
   .testi-name svg{width:13px;height:13px;}
   .testi-subs{font-size:12px;color:var(--gray);}
@@ -264,8 +228,8 @@
   .float-wpp.compact{padding:13px;}
   .float-wpp.compact span{display:none;}
 
-  /* ===================== RESPONSIVO (container query = reage tanto no navegador real quanto no toggle mobile do preview) ===================== */
-  @container site (max-width: 620px){
+  /* ===================== RESPONSIVO ===================== */
+  @media (max-width: 768px){
     .site-nav{padding:14px 18px;}
     .nav-links{display:none;}
     .nav-right{gap:10px;}
@@ -282,7 +246,7 @@
     .grid{grid-template-columns:repeat(2,1fr);gap:12px;}
 
     .about{grid-template-columns:1fr;}
-    .about-photo{aspect-ratio:16/9;}
+    .about-photo{width:100%;max-width:280px;aspect-ratio:1/1;}
 
     .testi-grid{grid-template-columns:1fr;}
 
@@ -296,283 +260,284 @@
 </head>
 <body>
 
-  <!-- ===================== BARRA DE PREVIEW — usada só aqui pra você revisar. Remover antes de mandar pro programador ===================== -->
-  <div id="preview-controls">
-    <strong>Pré-visualização</strong>
-    <button data-mode="desktop" class="active" id="btn-desktop">Desktop</button>
-    <button data-mode="mobile" id="btn-mobile">Mobile</button>
-    <span id="preview-note">— clique pra alternar como o site aparece nos dois formatos</span>
-  </div>
+  <div id="site">
 
-  <div id="frame-outer">
-    <div id="frame-wrapper">
-      <div id="site">
-
-        <!-- ===================== NAV ===================== -->
-        <nav class="site-nav">
-          <div class="brand"><span class="dot"></span>NERO EDITOR</div>
-          <ul class="nav-links">
-            <li><a href="#inicio" data-i18n="nav_home">Início</a></li>
-            <li><a href="#portfolio" data-i18n="nav_portfolio">Portfólio</a></li>
-            <li><a href="#sobre" data-i18n="nav_about">Sobre</a></li>
-            <li><a href="#depoimentos" data-i18n="nav_testimonials">Depoimentos</a></li>
-          </ul>
-          <div class="nav-right">
-            <div class="lang-toggle" id="lang-toggle">
-              <button data-lang="pt" class="active">PT</button>
-              <button data-lang="en">EN</button>
-            </div>
-            <a href="https://wa.me/556492216099" class="btn-wpp">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.2.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5-.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>
-              <span data-i18n="nav_wpp">Falar no WhatsApp</span>
-            </a>
-            <button class="hamburger" id="btn-hamburger" aria-label="Abrir menu">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-            </button>
-          </div>
-        </nav>
-        <div class="mobile-menu" id="mobile-menu">
-          <a href="#inicio" data-i18n="nav_home">Início</a>
-          <a href="#portfolio" data-i18n="nav_portfolio">Portfólio</a>
-          <a href="#sobre" data-i18n="nav_about">Sobre</a>
-          <a href="#depoimentos" data-i18n="nav_testimonials">Depoimentos</a>
-          <a href="https://wa.me/556492216099" class="btn-wpp"><span data-i18n="nav_wpp">Falar no WhatsApp</span></a>
+    <!-- ===================== NAV ===================== -->
+    <nav class="site-nav">
+      <div class="brand"><span class="dot"></span>NERO EDITOR</div>
+      <ul class="nav-links">
+        <li><a href="#inicio" data-i18n="nav_home">Home</a></li>
+        <li><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+        <li><a href="#sobre" data-i18n="nav_about">About</a></li>
+        <li><a href="#depoimentos" data-i18n="nav_testimonials">Testimonials</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="lang-toggle" id="lang-toggle">
+          <button data-lang="pt">PT</button>
+          <button data-lang="en" class="active">EN</button>
         </div>
+        <a href="https://wa.me/556492216099" class="btn-wpp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.2.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.1 1.5-.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3Z"/></svg>
+          <span data-i18n="nav_wpp">Chat on WhatsApp</span>
+        </a>
+        <button class="hamburger" id="btn-hamburger" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#inicio" data-i18n="nav_home">Home</a>
+      <a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a>
+      <a href="#sobre" data-i18n="nav_about">About</a>
+      <a href="#depoimentos" data-i18n="nav_testimonials">Testimonials</a>
+      <a href="https://wa.me/556492216099" class="btn-wpp"><span data-i18n="nav_wpp">Chat on WhatsApp</span></a>
+    </div>
 
-        <!-- ===================== HERO ===================== -->
-        <div class="hero" id="inicio">
-          <div>
-            <h1 data-i18n="hero_title">Seu vídeo, cortado do jeito certo pro seu nicho.</h1>
-            <p data-i18n="hero_text">Edito pra gameplay, vlog, anime e conteúdo vertical. Você manda o bruto, eu devolvo pronto — com o ritmo que aquele formato pede.</p>
-            <div class="hero-ctas">
-              <a href="https://wa.me/556492216099" class="btn-primary">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z"/></svg>
-                <span data-i18n="nav_wpp">Falar no WhatsApp</span>
-              </a>
-              <a href="#portfolio" class="btn-ghost" data-i18n="hero_cta_secondary">Ver portfólio</a>
-            </div>
-          </div>
-          <div class="hero-media">
-            <div class="frame">
-              <span class="label" data-i18n="hero_media_label">Demoreel geral</span>
-              <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-            </div>
-            <div class="scrubber">
-              <time>0:14</time>
-              <div class="bar"></div>
-              <time>0:42</time>
-            </div>
-          </div>
-        </div>
-
-        <!-- ===================== PORTFÓLIO ===================== -->
-        <section id="portfolio">
-          <div class="section-head">
-            <h2 data-i18n="portfolio_title">Portfólio</h2>
-            <p data-i18n="portfolio_text">Um recorte do que já saiu daqui. Filtra por formato e por nicho.</p>
-          </div>
-
-          <div class="format-toggle" id="format-toggle">
-            <button data-format="youtube" class="active">YouTube</button>
-            <button data-format="shorts">Shorts &amp; Reels</button>
-          </div>
-
-          <div class="niche-pills" id="niche-pills">
-            <button data-niche="todos" class="active" data-i18n="niche_all">Todos</button>
-            <button data-niche="gameplay">Gameplay</button>
-            <button data-niche="vlogs">Vlogs</button>
-            <button data-niche="anime">Anime</button>
-          </div>
-
-          <div class="grid" id="grid">
-            <!-- YOUTUBE — GAMEPLAY -->
-            <div class="card" data-format="youtube" data-niche="gameplay">
-              <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">8:12</span></div>
-              <div class="meta"><h4 data-i18n="card_1">Zerando sem morrer — ep. 3</h4><span>YouTube · Gameplay</span></div>
-            </div>
-            <div class="card" data-format="youtube" data-niche="gameplay">
-              <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">11:40</span></div>
-              <div class="meta"><h4 data-i18n="card_2">Ranked no limite</h4><span>YouTube · Gameplay</span></div>
-            </div>
-            <!-- YOUTUBE — VLOGS -->
-            <div class="card" data-format="youtube" data-niche="vlogs">
-              <div class="thumb thumb-vlogs"><span class="thumb-tag">Vlog</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">14:05</span></div>
-              <div class="meta"><h4 data-i18n="card_3">Um dia de gravação</h4><span>YouTube · Vlogs</span></div>
-            </div>
-            <div class="card" data-format="youtube" data-niche="vlogs">
-              <div class="thumb thumb-vlogs"><span class="thumb-tag">Vlog</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">9:30</span></div>
-              <div class="meta"><h4 data-i18n="card_4">Bastidor do canal</h4><span>YouTube · Vlogs</span></div>
-            </div>
-            <!-- YOUTUBE — ANIME -->
-            <div class="card" data-format="youtube" data-niche="anime">
-              <div class="thumb thumb-anime"><span class="thumb-tag">Anime</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">6:48</span></div>
-              <div class="meta"><h4 data-i18n="card_5">Análise de temporada</h4><span>YouTube · Anime</span></div>
-            </div>
-            <div class="card" data-format="youtube" data-niche="anime">
-              <div class="thumb thumb-anime"><span class="thumb-tag">Anime</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">7:20</span></div>
-              <div class="meta"><h4 data-i18n="card_6">Top arcos do ano</h4><span>YouTube · Anime</span></div>
-            </div>
-            <!-- SHORTS — GAMEPLAY -->
-            <div class="card shorts" data-format="shorts" data-niche="gameplay hide">
-              <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">0:38</span></div>
-              <div class="meta"><h4 data-i18n="card_7">Clipe insano ao vivo</h4><span>Shorts · Gameplay</span></div>
-            </div>
-            <div class="card shorts" data-format="shorts" data-niche="gameplay hide">
-              <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">0:24</span></div>
-              <div class="meta"><h4 data-i18n="card_8">Reação em tempo real</h4><span>Reels · Gameplay</span></div>
-            </div>
-            <!-- SHORTS — VLOGS -->
-            <div class="card shorts" data-format="shorts" data-niche="vlogs hide">
-              <div class="thumb thumb-vlogs"><span class="thumb-tag">Vlog</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">0:45</span></div>
-              <div class="meta"><h4 data-i18n="card_9">Corte do dia</h4><span>Shorts · Vlogs</span></div>
-            </div>
-            <div class="card shorts" data-format="shorts" data-niche="vlogs hide">
-              <div class="thumb thumb-vlogs"><span class="thumb-tag">Vlog</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">0:31</span></div>
-              <div class="meta"><h4 data-i18n="card_10">Melhor momento</h4><span>Reels · Vlogs</span></div>
-            </div>
-            <!-- SHORTS — ANIME -->
-            <div class="card shorts" data-format="shorts" data-niche="anime hide">
-              <div class="thumb thumb-anime"><span class="thumb-tag">Anime</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">0:29</span></div>
-              <div class="meta"><h4 data-i18n="card_11">Cena mais comentada</h4><span>Shorts · Anime</span></div>
-            </div>
-            <div class="card shorts" data-format="shorts" data-niche="anime hide">
-              <div class="thumb thumb-anime"><span class="thumb-tag">Anime</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span class="thumb-dur">0:52</span></div>
-              <div class="meta"><h4 data-i18n="card_12">Ranking rápido</h4><span>Reels · Anime</span></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===================== COLABS ===================== -->
-        <section>
-          <div class="section-head">
-            <h2 data-i18n="collab_title">Já rodou por aqui</h2>
-            <p data-i18n="collab_text">Canal grande, canal pequeno — mesmo nível de atenção nos dois.</p>
-          </div>
-          <div class="collab-row">
-            <div class="avatar">JS</div>
-            <div class="avatar">MK</div>
-            <div class="avatar">RV</div>
-            <div class="avatar">TL</div>
-            <div class="avatar">CB</div>
-            <div class="avatar">AN</div>
-            <div class="avatar">PX</div>
-          </div>
-        </section>
-
-        <!-- ===================== SOBRE ===================== -->
-        <section id="sobre">
-          <div class="about">
-            <div class="about-photo"></div>
-            <div class="about-text">
-              <div class="section-head" style="margin-bottom:20px;">
-                <h2 data-i18n="about_title">Sobre</h2>
-              </div>
-              <p data-i18n="about_p1"><strong>Eu sou o Nero.</strong> Edito vídeo pra internet — YouTube, clipe de Twitch, vertical, o que for. Já cortei conteúdo pra criador grande e pra quem tá começando agora, e trato os dois do mesmo jeito: assisto o material inteiro antes de decidir o que fica.</p>
-              <p data-i18n="about_p2">Se o seu nicho não tá no portfólio, eu produzo um demoreel específico pra ele antes de fechar qualquer coisa.</p>
-              <a href="https://wa.me/556492216099" class="btn-ghost" data-i18n="about_cta">Fala comigo</a>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===================== DEPOIMENTOS ===================== -->
-        <section id="depoimentos">
-          <div class="section-head">
-            <h2 data-i18n="testi_title">O que dizem</h2>
-            <p data-i18n="testi_text">Direto do YT Jobs.</p>
-          </div>
-          <div class="testi-grid">
-            <div class="testi-card">
-              <div class="testi-top">
-                <div class="avatar">LN</div>
-                <div>
-                  <div class="testi-name">Lorde Nero <svg viewBox="0 0 24 24" fill="#ff3b3f"><path d="M12 2 14.5 8H21l-5 4 2 7-6-4.5L6 19l2-7-5-4h6.5Z"/></svg></div>
-                  <div class="testi-subs" data-i18n="testi_1_subs">1,49 mil inscritos</div>
-                </div>
-              </div>
-              <p class="testi-quote" data-i18n="testi_1_quote">Desde que virou meu editor, meu canal subiu muito.</p>
-              <div class="testi-source">via YT Jobs</div>
-            </div>
-            <div class="testi-card">
-              <div class="testi-top">
-                <div class="avatar">MP</div>
-                <div>
-                  <div class="testi-name">Mrprincejr <svg viewBox="0 0 24 24" fill="#ff3b3f"><path d="M12 2 14.5 8H21l-5 4 2 7-6-4.5L6 19l2-7-5-4h6.5Z"/></svg></div>
-                  <div class="testi-subs" data-i18n="testi_2_subs">469 inscritos</div>
-                </div>
-              </div>
-              <p class="testi-quote" data-i18n="testi_2_quote">Sempre entrega o vídeo no melhor nível possível no menor tempo. Mesmo com prazo apertado e revisão em cima da hora, sai tudo certo — com qualidade.</p>
-              <div class="testi-source">via YT Jobs</div>
-            </div>
-            <div class="testi-card">
-              <div class="testi-top">
-                <div class="avatar">KT</div>
-                <div>
-                  <div class="testi-name">Katreis <svg viewBox="0 0 24 24" fill="#ff3b3f"><path d="M12 2 14.5 8H21l-5 4 2 7-6-4.5L6 19l2-7-5-4h6.5Z"/></svg></div>
-                  <div class="testi-subs" data-i18n="testi_3_subs">254 mil inscritos</div>
-                </div>
-              </div>
-              <p class="testi-quote" data-i18n="testi_3_quote">Adorei o serviço.</p>
-              <div class="testi-source">via YT Jobs</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===================== CTA FINAL ===================== -->
-        <section class="final-cta">
-          <h2 data-i18n="final_title">Manda o material</h2>
-          <p data-i18n="final_text">Resposta rápida, sem enrolar. Fala comigo no WhatsApp e a gente alinha o formato, o prazo e o valor.</p>
+    <!-- ===================== HERO ===================== -->
+    <div class="hero" id="inicio">
+      <div>
+        <h1 data-i18n="hero_title">Your video, cut the right way for your niche.</h1>
+        <p data-i18n="hero_text">I edit gameplay, vlogs, anime and vertical content. You send the raw footage, I send back something ready to post — with the pacing that format needs.</p>
+        <div class="hero-ctas">
           <a href="https://wa.me/556492216099" class="btn-primary">
             <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z"/></svg>
-            <span data-i18n="nav_wpp">Falar no WhatsApp</span>
+            <span data-i18n="nav_wpp">Chat on WhatsApp</span>
           </a>
-          <div class="social-row">
-            <div class="social-btn disabled" title="Em breve">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
-              <span class="soon-tag" data-i18n="soon">em breve</span>
-            </div>
-            <div class="social-btn disabled" title="Em breve">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 2H21l-6.5 7.4L22.2 22h-6.8l-5.3-6.9L3.9 22H1.2l7-8-7.9-11h7l4.8 6.3Z"/></svg>
-              <span class="soon-tag" data-i18n="soon">em breve</span>
-            </div>
-          </div>
-        </section>
+          <a href="#portfolio" class="btn-ghost" data-i18n="hero_cta_secondary">See portfolio</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <!-- ## DEMOREEL INICIAL (Altere o link do iframe ou do link do YouTube abaixo se precisar) -->
+        <div class="frame">
+          <span class="label" data-i18n="hero_media_label">General demo reel</span>
+          <a href="https://youtu.be/-M70DAdB1VY" target="_blank" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </a>
+        </div>
+        <div class="scrubber">
+          <time>0:14</time>
+          <div class="bar"></div>
+          <time>0:42</time>
+        </div>
+      </div>
+    </div>
 
-        <footer>
-          <div class="brand"><span class="dot"></span>NERO EDITOR</div>
-          <small data-i18n="footer_text">© 2026 Nero Editor · edição de vídeo</small>
-        </footer>
+    <!-- ===================== PORTFÓLIO ===================== -->
+    <section id="portfolio">
+      <div class="section-head">
+        <h2 data-i18n="portfolio_title">Portfolio</h2>
+        <p data-i18n="portfolio_text">A slice of what's come out of here. Filter by format and by niche.</p>
+      </div>
 
-        <!-- ===================== WHATSAPP FLUTUANTE ===================== -->
-        <a href="https://wa.me/556492216099" class="float-wpp" id="float-wpp">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z"/></svg>
-          <span data-i18n="float_wpp">Fale comigo</span>
+      <div class="format-toggle" id="format-toggle">
+        <button data-format="youtube" class="active">YouTube</button>
+        <button data-format="shorts">Shorts &amp; Reels</button>
+      </div>
+
+      <div class="niche-pills" id="niche-pills">
+        <button data-niche="todos" class="active" data-i18n="niche_all">All</button>
+        <button data-niche="gameplay">Gameplay</button>
+        <button data-niche="vlogs">Vlogs</button>
+        <button data-niche="anime">Anime</button>
+        <button data-niche="storytelling">Storytelling</button>
+        <button data-niche="podcast">Podcast</button>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- ## AREA DE VIDEOS DO PORTFOLIO (Para alterar, adicione/mude os links e tags) -->
+      <!-- ========================================================================= -->
+      <div class="grid" id="grid">
+
+        <!-- ==================== VIDEOS HORIZONTAIS (YOUTUBE) - PT-BR ==================== -->
+        
+        <!-- Video 1: Gameplay -->
+        <a href="https://www.youtube.com/watch?v=m81fSzFMRmc" target="_blank" class="card" data-format="youtube" data-niche="gameplay" data-lang="pt">
+          <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Video 2: Gameplay -->
+        <a href="https://www.youtube.com/watch?v=s-dthYY1mQU" target="_blank" class="card" data-format="youtube" data-niche="gameplay" data-lang="pt">
+          <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Video 3: Vlog -->
+        <a href="https://youtu.be/v54JkhiTSgQ" target="_blank" class="card" data-format="youtube" data-niche="vlogs" data-lang="pt">
+          <div class="thumb thumb-vlogs"><span class="thumb-tag">Vlog</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Video 4: Vlog -->
+        <a href="https://youtu.be/FgP16GUatCs" target="_blank" class="card" data-format="youtube" data-niche="vlogs" data-lang="pt">
+          <div class="thumb thumb-vlogs"><span class="thumb-tag">Vlog</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Video 5: Anime -->
+        <a href="https://youtu.be/_MbCUv6ipDA" target="_blank" class="card" data-format="youtube" data-niche="anime" data-lang="pt">
+          <div class="thumb thumb-anime"><span class="thumb-tag">Anime</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Video 6: Gameplay -->
+        <a href="https://www.youtube.com/watch?v=Ydyl83zWv68" target="_blank" class="card" data-format="youtube" data-niche="gameplay" data-lang="pt">
+          <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Video 7: Vlog -->
+        <a href="https://youtu.be/7hUfuBLI4gU" target="_blank" class="card" data-format="youtube" data-niche="vlogs" data-lang="pt">
+          <div class="thumb thumb-vlogs"><span class="thumb-tag">Vlog</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Video 8: Storytelling / ARG -->
+        <a href="https://youtu.be/vhljKePImKQ" target="_blank" class="card" data-format="youtube" data-niche="storytelling" data-lang="pt">
+          <div class="thumb thumb-vlogs"><span class="thumb-tag">Storytelling</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Video 9: Storytelling / ARG -->
+        <a href="https://youtu.be/h4IK9U7npPk" target="_blank" class="card" data-format="youtube" data-niche="storytelling" data-lang="pt">
+          <div class="thumb thumb-vlogs"><span class="thumb-tag">Storytelling</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+
+        <!-- ==================== VIDEOS VERTICAIS (SHORTS/REELS) - PT-BR ==================== -->
+
+        <!-- Short 1: Anime -->
+        <a href="https://www.youtube.com/watch?v=3-JCOvaV3PQ" target="_blank" class="card shorts" data-format="shorts" data-niche="anime" data-lang="pt">
+          <div class="thumb thumb-anime"><span class="thumb-tag">Anime</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Short 2: Anime -->
+        <a href="https://www.youtube.com/watch?v=axvuiXMCTsE" target="_blank" class="card shorts" data-format="shorts" data-niche="anime" data-lang="pt">
+          <div class="thumb thumb-anime"><span class="thumb-tag">Anime</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Short 3: Gameplay -->
+        <a href="https://www.youtube.com/watch?v=MGFgytiIqi0" target="_blank" class="card shorts" data-format="shorts" data-niche="gameplay" data-lang="pt">
+          <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Short 4: Gameplay -->
+        <a href="https://www.youtube.com/watch?v=I8MYR7Y150c" target="_blank" class="card shorts" data-format="shorts" data-niche="gameplay" data-lang="pt">
+          <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Short 5: Gameplay -->
+        <a href="https://www.youtube.com/watch?v=wf1AglOHoPc" target="_blank" class="card shorts" data-format="shorts" data-niche="gameplay" data-lang="pt">
+          <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Short 6: Corte de Podcast -->
+        <a href="https://www.youtube.com/watch?v=DkTtTPDBiVE" target="_blank" class="card shorts" data-format="shorts" data-niche="podcast" data-lang="pt">
+          <div class="thumb thumb-vlogs"><span class="thumb-tag">Podcast</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Short 7: Corte de Podcast -->
+        <a href="https://www.youtube.com/watch?v=k9nmCOjVR6c" target="_blank" class="card shorts" data-format="shorts" data-niche="podcast" data-lang="pt">
+          <div class="thumb thumb-vlogs"><span class="thumb-tag">Podcast</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </a>
+
+        <!-- Short 8: Gameplay -->
+        <a href="https://www.youtube.com/shorts/hZsaiaQCI3o" target="_blank" class="card shorts" data-format="shorts" data-niche="gameplay" data-lang="pt">
+          <div class="thumb thumb-gameplay"><span class="thumb-tag">Gameplay</span><div class="thumb-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         </a>
 
       </div>
-    </div>
+    </section>
+
+    <!-- ===================== SOBRE ===================== -->
+    <section id="sobre">
+      <div class="about">
+        <!-- ## FOTO DO SOBRE (Substitua a imagem por foto.jpg ou foto.png na mesma pasta) -->
+        <div class="about-photo"></div>
+        <div class="about-text">
+          <div class="section-head" style="margin-bottom:20px;">
+            <h2 data-i18n="about_title">About</h2>
+          </div>
+          <p data-i18n="about_p1"><strong>Eu sou o Nero.</strong> Edito videos para a internet a mais de 4 anos. Ja trabalhei com diversos clientes diferentes, tanto em nicho quanto tamanho.</p>
+          <p data-i18n="about_p2">Se seu nicho não está no portfolio, me chama aqui embaixo que eu te passo um exemplo especifico pra você antes de fecharmos qualquer coisa!</p>
+          <a href="https://wa.me/556492216099" class="btn-ghost" data-i18n="about_cta">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DEPOIMENTOS ===================== -->
+    <section id="depoimentos">
+      <div class="section-head">
+        <h2 data-i18n="testi_title">What people say</h2>
+        <p data-i18n="testi_text">Straight from YT Jobs.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-top">
+            <div class="avatar">LN</div>
+            <div>
+              <div class="testi-name">Lorde Nero <svg viewBox="0 0 24 24" fill="#ff3b3f"><path d="M12 2 14.5 8H21l-5 4 2 7-6-4.5L6 19l2-7-5-4h6.5Z"/></svg></div>
+              <div class="testi-subs" data-i18n="testi_1_subs">1.49K subscribers</div>
+            </div>
+          </div>
+          <p class="testi-quote" data-i18n="testi_1_quote">Since he became my editor my channel has grown a lot.</p>
+          <div class="testi-source">via YT Jobs</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-top">
+            <div class="avatar">MP</div>
+            <div>
+              <div class="testi-name">Mrprincejr <svg viewBox="0 0 24 24" fill="#ff3b3f"><path d="M12 2 14.5 8H21l-5 4 2 7-6-4.5L6 19l2-7-5-4h6.5Z"/></svg></div>
+              <div class="testi-subs" data-i18n="testi_2_subs">469 subscribers</div>
+            </div>
+          </div>
+          <p class="testi-quote" data-i18n="testi_2_quote">Nero is the kind of editor who's always ready to make your video the best it can be in the shortest time possible. Even with a tight deadline and revisions along the way, he still delivers on time, with outstanding quality.</p>
+          <div class="testi-source">via YT Jobs</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-top">
+            <div class="avatar">KT</div>
+            <div>
+              <div class="testi-name">Katreis <svg viewBox="0 0 24 24" fill="#ff3b3f"><path d="M12 2 14.5 8H21l-5 4 2 7-6-4.5L6 19l2-7-5-4h6.5Z"/></svg></div>
+              <div class="testi-subs" data-i18n="testi_3_subs">254K subscribers</div>
+            </div>
+          </div>
+          <p class="testi-quote" data-i18n="testi_3_quote">Loved the service.</p>
+          <div class="testi-source">via YT Jobs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA FINAL ===================== -->
+    <section class="final-cta">
+      <h2 data-i18n="final_title">Send your material</h2>
+      <p data-i18n="final_text">Quick reply, no runaround. Message me on WhatsApp and we'll sort out format, deadline and price.</p>
+      <a href="https://wa.me/556492216099" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z"/></svg>
+        <span data-i18n="nav_wpp">Chat on WhatsApp</span>
+      </a>
+      <div class="social-row">
+        <div class="social-btn disabled" title="Em breve">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          <span class="soon-tag" data-i18n="soon">coming soon</span>
+        </div>
+        <div class="social-btn disabled" title="Em breve">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 2H21l-6.5 7.4L22.2 22h-6.8l-5.3-6.9L3.9 22H1.2l7-8-7.9-11h7l4.8 6.3Z"/></svg>
+          <span class="soon-tag" data-i18n="soon">coming soon</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="brand"><span class="dot"></span>NERO EDITOR</div>
+      <small data-i18n="footer_text">© 2026 Nero Editor · video editing</small>
+    </footer>
+
+    <!-- ===================== WHATSAPP FLUTUANTE ===================== -->
+    <a href="https://wa.me/556492216099" class="float-wpp" id="float-wpp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z"/></svg>
+      <span data-i18n="float_wpp">Message me</span>
+    </a>
+
   </div>
 
 <script>
-  // ---- Toggle Desktop / Mobile (ferramenta de preview, não faz parte do site final) ----
-  const frameWrapper = document.getElementById('frame-wrapper');
-  const btnDesktop = document.getElementById('btn-desktop');
-  const btnMobile = document.getElementById('btn-mobile');
-  function setMode(mode){
-    if(mode === 'mobile'){
-      frameWrapper.classList.add('mobile-preview');
-      btnMobile.classList.add('active'); btnDesktop.classList.remove('active');
-    } else {
-      frameWrapper.classList.remove('mobile-preview');
-      btnDesktop.classList.add('active'); btnMobile.classList.remove('active');
-    }
-  }
-  btnDesktop.addEventListener('click', () => setMode('desktop'));
-  btnMobile.addEventListener('click', () => setMode('mobile'));
-
-  // ---- Idioma PT / EN ----
+  // ---- Dicionário de Idiomas PT / EN ----
   const i18n = {
     pt:{
-      nav_home:"Início", nav_portfolio:"Portfólio", nav_about:"Sobre", nav_testimonials:"Depoimentos",
+      nav_home:"Início", nav_portfolio:"Portfólio", nav_sobre:"Sobre", nav_testimonials:"Depoimentos",
       nav_wpp:"Falar no WhatsApp",
       hero_title:"Seu vídeo, cortado do jeito certo pro seu nicho.",
       hero_text:"Edito pra gameplay, vlog, anime e conteúdo vertical. Você manda o bruto, eu devolvo pronto — com o ritmo que aquele formato pede.",
@@ -581,17 +546,9 @@
       portfolio_title:"Portfólio",
       portfolio_text:"Um recorte do que já saiu daqui. Filtra por formato e por nicho.",
       niche_all:"Todos",
-      card_1:"Zerando sem morrer — ep. 3", card_2:"Ranked no limite",
-      card_3:"Um dia de gravação", card_4:"Bastidor do canal",
-      card_5:"Análise de temporada", card_6:"Top arcos do ano",
-      card_7:"Clipe insano ao vivo", card_8:"Reação em tempo real",
-      card_9:"Corte do dia", card_10:"Melhor momento",
-      card_11:"Cena mais comentada", card_12:"Ranking rápido",
-      collab_title:"Já rodou por aqui",
-      collab_text:"Canal grande, canal pequeno — mesmo nível de atenção nos dois.",
       about_title:"Sobre",
-      about_p1:"<strong>Eu sou o Nero.</strong> Edito vídeo pra internet — YouTube, clipe de Twitch, vertical, o que for. Já cortei conteúdo pra criador grande e pra quem tá começando agora, e trato os dois do mesmo jeito: assisto o material inteiro antes de decidir o que fica.",
-      about_p2:"Se o seu nicho não tá no portfólio, eu produzo um demoreel específico pra ele antes de fechar qualquer coisa.",
+      about_p1:"<strong>Eu sou o Nero.</strong> Edito videos para a internet a mais de 4 anos. Ja trabalhei com diversos clientes diferentes, tanto em nicho quanto tamanho.",
+      about_p2:"Se seu nicho não está no portfolio, me chama aqui embaixo que eu te passo um exemplo especifico pra você antes de fecharmos qualquer coisa!",
       about_cta:"Fala comigo",
       testi_title:"O que dizem", testi_text:"Direto do YT Jobs.",
       testi_1_subs:"1,49 mil inscritos", testi_1_quote:"Desde que virou meu editor, meu canal subiu muito.",
@@ -613,14 +570,6 @@
       portfolio_title:"Portfolio",
       portfolio_text:"A slice of what's come out of here. Filter by format and by niche.",
       niche_all:"All",
-      card_1:"Beating it without dying — ep. 3", card_2:"Ranked at the limit",
-      card_3:"A day of filming", card_4:"Behind the channel",
-      card_5:"Season breakdown", card_6:"Best arcs of the year",
-      card_7:"Insane live clip", card_8:"Reacting in real time",
-      card_9:"Clip of the day", card_10:"Best moment",
-      card_11:"Most talked-about scene", card_12:"Quick ranking",
-      collab_title:"Already worked with",
-      collab_text:"Big channel, small channel — same level of attention either way.",
       about_title:"About",
       about_p1:"<strong>I'm Nero.</strong> I edit video for the internet — YouTube, Twitch clips, vertical, whatever it takes. I've cut content for big creators and for people just starting out, and I treat both the same way: I watch the full footage before deciding what stays.",
       about_p2:"If your niche isn't in the portfolio yet, I'll put together a demo reel for it before we close anything.",
@@ -636,27 +585,40 @@
       float_wpp:"Message me"
     }
   };
+
   const langToggle = document.getElementById('lang-toggle');
+  let currentLang = 'en';
+
   function setLang(lang){
+    currentLang = lang;
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if(i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
     });
     document.querySelectorAll('#lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    applyFilter();
   }
+
   langToggle.addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-lang]');
     if(btn) setLang(btn.dataset.lang);
   });
-  setLang('pt');
+
+  // ---- Identifica idioma inicial pelo navegador ou define inglês por padrão ----
+  const browserLang = navigator.language || navigator.userLanguage;
+  if(browserLang && browserLang.startsWith('pt')){
+    setLang('pt');
+  } else {
+    setLang('en');
+  }
 
   // ---- Menu hambúrguer mobile ----
   const hamburger = document.getElementById('btn-hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 
-  // ---- Filtro do portfólio: formato + nicho ----
+  // ---- Filtro do portfólio: formato + nicho + idioma ----
   const formatButtons = document.querySelectorAll('#format-toggle button');
   const nicheButtons = document.querySelectorAll('#niche-pills button');
   const cards = document.querySelectorAll('#grid .card');
@@ -666,23 +628,25 @@
   function applyFilter(){
     cards.forEach(card => {
       const matchesFormat = card.dataset.format === currentFormat;
-      const matchesNiche = currentNiche === 'todos' || card.dataset.niche.includes(currentNiche);
-      card.classList.toggle('hide', !(matchesFormat && matchesNiche));
+      const matchesNiche = currentNiche === 'todos' || card.dataset.niche === currentNiche;
+      const matchesLang = card.dataset.lang === currentLang;
+      card.classList.toggle('hide', !(matchesFormat && matchesNiche && matchesLang));
     });
   }
+
   formatButtons.forEach(btn => btn.addEventListener('click', () => {
     formatButtons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentFormat = btn.dataset.format;
     applyFilter();
   }));
+
   nicheButtons.forEach(btn => btn.addEventListener('click', () => {
     nicheButtons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentNiche = btn.dataset.niche;
     applyFilter();
   }));
-  applyFilter();
 
   // ---- WhatsApp flutuante encolhe ao rolar dentro da seção de portfólio ----
   const floatWpp = document.getElementById('float-wpp');
